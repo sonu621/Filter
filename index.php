@@ -102,7 +102,7 @@ require("connection.php");
                     </div>
                     <div class="card-body">
                         <h6>
-                            Category List
+                            Book Category List
                         </h6>
                         <hr>
                         <?php
@@ -116,16 +116,16 @@ require("connection.php");
                             // Loop through the query result
                             while ($row = mysqli_fetch_assoc($category_result)) {
                                 ?>
-                                <div>
-                                    <input type="checkbox" name="category[]" value="<?php echo $row['category']; ?>" <?php
+                        <div>
+                            <input type="checkbox" name="category[]" value="<?php echo $row['category']; ?>" <?php
                                        // Check if the category is in the selected categories array
                                        if (in_array($row['category'], $checked)) {
                                            echo 'checked'; // Add the 'checked' attribute if the category is selected
                                        }
                                        ?> />
-                                    <?php echo $row['category']; ?>
-                                </div>
-                                <?php
+                            <?php echo $row['category']; ?>
+                        </div>
+                        <?php
                             }
                         } else {
                             echo "No Categories Found!";
@@ -142,6 +142,7 @@ require("connection.php");
         <div class="col-md-9 mt-3">
             <div class="card">
                 <div class="card-body row">
+                    <h>Book Details</h>
                     <?php
                     // Assuming $_GET['category'] is an array, sanitize the array values
                     if (isset($_GET['category']) && is_array($_GET['category'])) {
@@ -162,7 +163,11 @@ require("connection.php");
                             while ($row = mysqli_fetch_assoc($author_run)) {
                                 echo "<div class='col-md-4 mt-3'>";
                                 echo "<div class='border p-2'>";
-                                echo "<h6>" . $row['author'] . "</h6>";
+                                echo "<h6>Author name: <i class='text-primary-emphasis'>" . $row['author'] . "</i></h6>";
+                                echo "<h6>Book Title: <i class='text-danger-emphasis'>" . $row['book_title'] . "</i></h6>";
+                                echo "<h6>Rental Price: <i class='text-secondary'>SAR" . $row['rental_price'] . "</i></h6>";
+                                echo "<h6>In stock: <i class='text-success-emphasis'>" . $row['status'] . "</i></h6>";
+                                echo "<h6>Publisher: <i class='text-success'>" . $row['publisher'] . "</i></h6>";
                                 echo "</div></div>";
                             }
                         } else {
